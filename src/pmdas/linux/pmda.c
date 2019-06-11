@@ -68,6 +68,7 @@
 #include "numa_meminfo.h"
 #include "ksm.h"
 #include "sysfs_tapestats.h"
+#include "sysfs_dmi.h"
 #include "proc_tty.h"
 #include "proc_pressure.h"
 
@@ -5695,6 +5696,39 @@ static pmdaMetric metrictab[] = {
     /* kernel.all.pressure.io.full.total */
     { NULL, { PMDA_PMID(CLUSTER_PRESSURE_IO,3), PM_TYPE_U64, PM_INDOM_NULL,
 	      PM_SEM_COUNTER, PMDA_PMUNITS(0,1,0,0,PM_TIME_USEC,0)}},
+
+/*
+* /sys/class/dmi/id/ cluster
+*/
+
+    /* hinv.dmi.board_vendor */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 0), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+
+    /* hinv.dmi.board_name */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 1), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+
+    /* hinv.dmi.board_version */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 2), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+    
+    /* hinv.dmi.product_family */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 3), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+    
+    /* hinv.dmi.product_name */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 4), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+    
+    /* hinv.dmi.product_version */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 5), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+    
+    /* hinv.dmi.sys_vendor */
+    { NULL, { PMDA_PMID(CLUSTER_SYSFS_DMI, 6), PM_TYPE_STRING, 
+        PM_INDOM_NULL, PM_SEM_DISCRETE, PMDA_PMUNITS(0,0,0,0,0,0) } },
+    
 };
 
 typedef struct {
@@ -5765,6 +5799,8 @@ linux_refresh(pmdaExt *pmda, int *need_refresh, int context)
 
     if (need_refresh[CLUSTER_CPUINFO])
 	refresh_proc_cpuinfo();
+
+    /* TODO */
 
     if (need_refresh[CLUSTER_MEMINFO])
 	refresh_proc_meminfo(&proc_meminfo);
@@ -7326,6 +7362,8 @@ linux_fetchCallBack(pmdaMetric *mdesc, unsigned int inst, pmAtomValue *atom)
 	}
 	break;
 
+    /* TODO */
+
     case CLUSTER_SYSFS_DEVICES:
 	switch (item) {
 	case 0: /* hinv.cpu.online */
@@ -8090,6 +8128,31 @@ linux_fetchCallBack(pmdaMetric *mdesc, unsigned int inst, pmAtomValue *atom)
 	}
 	break;
 
+    /*
+    * /sys/class/dmi/id/ cluster
+    */
+    case CLUSTER_SYSFS_DMI:
+    switch(item) {
+        case 0: /* hinv.dmi.board_vendor */
+            break;
+        case 1: /* hinv.dmi.board_name */
+            break;
+        case 2: /* hinv.dmi.board_version */
+            break;
+        case 3: /* hinv.dmi.product_family */
+            break;
+        case 4: /* hinv.dmi.product_name */
+            break;
+        case 5: /* hinv.dmi.product_version */
+            break;
+        case 6: /* hinv.dmi.sys_vendor */
+            break;
+        default:
+	        return PM_ERR_PMID;
+
+    }
+    break;
+
     default: /* unknown cluster */
 	return PM_ERR_PMID;
     }
@@ -8139,6 +8202,7 @@ linux_fetch(int numpmid, pmID pmidlist[], pmResult **resp, pmdaExt *pmda)
 	    break;
 
 	case CLUSTER_CPUINFO:
+    /* TODO? */
 	case CLUSTER_INTERRUPT_LINES:
 	case CLUSTER_INTERRUPT_OTHER:
 	case CLUSTER_INTERRUPTS:

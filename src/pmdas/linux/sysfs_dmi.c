@@ -36,16 +36,6 @@ int getMetricFromFile(char * metricBuffer, const char * filename) {
     return 0; // Success
 }
 
-void printData(sysfs_dmi_t *sysfs_dmi) {
-    printf("board_vendor: %s\n", sysfs_dmi->board_vendor);
-    printf("board_name: %s\n", sysfs_dmi->board_name);
-    printf("board_version: %s\n", sysfs_dmi->board_version);
-    printf("product_family: %s\n", sysfs_dmi->product_family);
-    printf("product_name: %s\n", sysfs_dmi->product_name);
-    printf("product_version: %s\n", sysfs_dmi->product_version);
-    printf("sys_vendor: %s\n", sysfs_dmi->sys_vendor);
-}
-
 int refresh_sysfs_dmi(sysfs_dmi_t *sysfs_dmi) {
     char buffer[DMI_NUM_METRICS][DMI_BUFFER_SIZE];
     memset(buffer, '\0', sizeof(buffer));
@@ -71,14 +61,6 @@ int refresh_sysfs_dmi(sysfs_dmi_t *sysfs_dmi) {
     strncpy(sysfs_dmi->product_name, buffer[4], DMI_BUFFER_SIZE);
     strncpy(sysfs_dmi->product_version, buffer[5], DMI_BUFFER_SIZE);
     strncpy(sysfs_dmi->sys_vendor, buffer[6], DMI_BUFFER_SIZE);
-
-    return 0;
-}
-
-int main() {
-    sysfs_dmi_t sysfs_dmi;
-    refresh_sysfs_dmi(&sysfs_dmi);
-    printData(&sysfs_dmi);
 
     return 0;
 }

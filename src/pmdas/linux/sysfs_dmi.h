@@ -1,3 +1,5 @@
+#ifndef DMI_BUFFER_SIZE
+
 #define DMI_BUFFER_SIZE 64
 #define DMI_PATH "/sys/class/dmi/id/"
 #define DMI_NUM_METRICS (sizeof(SYSFS_DMI_METRICS)/sizeof(char *))
@@ -20,7 +22,8 @@ const char * const SYSFS_DMI_METRICS[] = {
     "product_name",
     "product_version",
     "sys_vendor",
-    "blarg",
 };
 
 extern int refresh_sysfs_dmi(sysfs_dmi_t *);
+
+#endif

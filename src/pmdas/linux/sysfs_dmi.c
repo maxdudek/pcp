@@ -4,7 +4,8 @@
 #include "sysfs_dmi.h"
 
 void stripNewline(char *s) {
-    for (int i = 0; s[i] != '\0' && i < DMI_BUFFER_SIZE; i++) {
+    int i;
+    for (i = 0; s[i] != '\0' && i < DMI_BUFFER_SIZE; i++) {
         if (s[i] == '\n') s[i] = '\0';
     }
 }
@@ -15,13 +16,15 @@ void stripNewline(char *s) {
  *  0: success
  *  1: file not found
  *  2: file exists, but does not contain anything
+ *  3: data could not be read from file (fread returned 0)
  */
 int getMetricFromFile(char * metricBuffer, const char * filename) {
-    int length;
     FILE * f = fopen (filename, "rb");
 
     if (f) {
-        fread (metricBuffer, 1, DMI_BUFFER_SIZE, f);
+        if (fread (metricBuffer, 1, DMI_BUFFER_SIZE, f) == 0) {
+            return 3; // Read error
+        }
         fclose (f);
     } else {
         return 1; // File not found
@@ -47,7 +50,8 @@ int refresh_sysfs_dmi(sysfs_dmi_t *sysfs_dmi) {
     char buffer[DMI_NUM_METRICS][DMI_BUFFER_SIZE];
     memset(buffer, '\0', sizeof(buffer));
 
-    for (int i = 0; i < DMI_NUM_METRICS; i++) {
+    int i;
+    for (i = 0; i < DMI_NUM_METRICS; i++) {
         const char *metricName = SYSFS_DMI_METRICS[i];
         
         char dmiFilename[DMI_BUFFER_SIZE];

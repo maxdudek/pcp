@@ -157,4 +157,5 @@ pmda.o proc_buddyinfo.o:	proc_buddyinfo.h
 pmda.o proc_zoneinfo.o:	proc_zoneinfo.h
 pmda.o ksm.o:	ksm.h
 pmda.o proc_fs_nfsd.o:	proc_fs_nfsd.h
+pmda.o sysfs_dmi.o: sysfs_dmi.h
 pmda.o:	$(VERSION_SCRIPT)

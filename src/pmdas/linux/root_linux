@@ -49,6 +49,7 @@ hinv {
     map		
     cpu
     node
+    dmi
     hugepagesize	60:1:59
     ntape		60:71:16
 }

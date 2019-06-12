@@ -72,10 +72,6 @@ int refresh_sysfs_dmi(sysfs_dmi_t *sysfs_dmi) {
     return 0;
 }
 
-
-
-
-
 int main() {
     sysfs_dmi_t sysfs_dmi;
     refresh_sysfs_dmi(&sysfs_dmi);

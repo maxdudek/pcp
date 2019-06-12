@@ -68,9 +68,9 @@
 #include "numa_meminfo.h"
 #include "ksm.h"
 #include "sysfs_tapestats.h"
-#include "sysfs_dmi.h"
 #include "proc_tty.h"
 #include "proc_pressure.h"
+#include "sysfs_dmi.h"
 
 static proc_stat_t		proc_stat;
 static proc_meminfo_t		proc_meminfo;
@@ -107,6 +107,7 @@ static ksm_info_t               ksm_info;
 static proc_fs_nfsd_t 		proc_fs_nfsd;
 static proc_locks_t 		proc_locks;
 static int                      proc_tty_permission;
+static sysfs_dmi_t          sysfs_dmi;
 
 static int		_isDSO = 1;	/* =0 I am a daemon */
 static int		rootfd = -1;	/* af_unix pmdaroot */
@@ -5800,8 +5801,6 @@ linux_refresh(pmdaExt *pmda, int *need_refresh, int context)
     if (need_refresh[CLUSTER_CPUINFO])
 	refresh_proc_cpuinfo();
 
-    /* TODO */
-
     if (need_refresh[CLUSTER_MEMINFO])
 	refresh_proc_meminfo(&proc_meminfo);
 
@@ -6023,6 +6022,9 @@ linux_refresh(pmdaExt *pmda, int *need_refresh, int context)
 	refresh_proc_pressure_mem(&proc_pressure);
     if (need_refresh[CLUSTER_PRESSURE_IO])
 	refresh_proc_pressure_io(&proc_pressure);
+
+    if (need_refresh[CLUSTER_SYSFS_DMI])
+    refresh_sysfs_dmi(&sysfs_dmi);
 
 done:
     if (need_refresh_mtab)
@@ -7362,8 +7364,6 @@ linux_fetchCallBack(pmdaMetric *mdesc, unsigned int inst, pmAtomValue *atom)
 	}
 	break;
 
-    /* TODO */
-
     case CLUSTER_SYSFS_DEVICES:
 	switch (item) {
 	case 0: /* hinv.cpu.online */
@@ -8134,18 +8134,39 @@ linux_fetchCallBack(pmdaMetric *mdesc, unsigned int inst, pmAtomValue *atom)
     case CLUSTER_SYSFS_DMI:
     switch(item) {
         case 0: /* hinv.dmi.board_vendor */
+            if (sysfs_dmi.board_vendor[0] == '\0')
+                return 0;
+            atom->cp = sysfs_dmi.board_vendor;
             break;
         case 1: /* hinv.dmi.board_name */
+            if (sysfs_dmi.board_name[0] == '\0')
+                return 0;
+            atom->cp = sysfs_dmi.board_name;
             break;
         case 2: /* hinv.dmi.board_version */
+            if (sysfs_dmi.board_version[0] == '\0')
+                return 0;
+            atom->cp = sysfs_dmi.board_version;
             break;
         case 3: /* hinv.dmi.product_family */
+            if (sysfs_dmi.product_family[0] == '\0')
+                return 0;
+            atom->cp = sysfs_dmi.product_family;
             break;
         case 4: /* hinv.dmi.product_name */
+            if (sysfs_dmi.product_name[0] == '\0')
+                return 0;
+            atom->cp = sysfs_dmi.product_name;
             break;
         case 5: /* hinv.dmi.product_version */
+            if (sysfs_dmi.product_version[0] == '\0')
+                return 0;
+            atom->cp = sysfs_dmi.product_version;
             break;
         case 6: /* hinv.dmi.sys_vendor */
+            if (sysfs_dmi.sys_vendor[0] == '\0')
+                    return 0;
+                atom->cp = sysfs_dmi.sys_vendor;
             break;
         default:
 	        return PM_ERR_PMID;
@@ -8202,7 +8223,6 @@ linux_fetch(int numpmid, pmID pmidlist[], pmResult **resp, pmdaExt *pmda)
 	    break;
 
 	case CLUSTER_CPUINFO:
-    /* TODO? */
 	case CLUSTER_INTERRUPT_LINES:
 	case CLUSTER_INTERRUPT_OTHER:
 	case CLUSTER_INTERRUPTS:

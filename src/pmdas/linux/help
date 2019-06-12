@@ -1873,3 +1873,11 @@ Pressure stall information (PSI) from /proc/pressure/io.
 @ kernel.all.pressure.io.full.total Total time when all tasks stall on IO resources
 The CPU time in which all tasks stalled on IO resources.
 Pressure stall information (PSI) from /proc/pressure/io.
+
+@ hinv.dmi.board_vendor the board vendor as reported by /sys/class/dmi/id/board_vendor
+@ hinv.dmi.board_name the board name as reported by /sys/class/dmi/id/board_name
+@ hinv.dmi.board_version the board version as reported by /sys/class/dmi/id/board_version
+@ hinv.dmi.product_family the product family as reported by /sys/class/dmi/id/product_family
+@ hinv.dmi.product_name the product name as reported by /sys/class/dmi/id/product_name
+@ hinv.dmi.product_version the product version as reported by /sys/class/dmi/id/product_version
+@ hinv.dmi.sys_vendor the system vendor as reported by /sys/class/dmi/id/sys_vendor

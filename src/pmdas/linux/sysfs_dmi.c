@@ -3,7 +3,6 @@
 #include <string.h>
 #include "sysfs_dmi.h"
 
-#define DMI_BUFFER_SIZE 64
 #define DMI_PATH "/sys/class/dmi/id/"
 #define DMI_NUM_METRICS (sizeof(SYSFS_DMI_METRICS)/sizeof(char *))
 

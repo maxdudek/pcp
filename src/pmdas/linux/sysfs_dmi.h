@@ -1,6 +1,8 @@
 #ifndef _DMI_
 #define _DMI_
 
+#define DMI_BUFFER_SIZE 64
+
 typedef struct {
     char board_vendor[DMI_BUFFER_SIZE];
     char board_name[DMI_BUFFER_SIZE];

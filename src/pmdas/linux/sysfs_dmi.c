@@ -3,6 +3,20 @@
 #include <string.h>
 #include "sysfs_dmi.h"
 
+#define DMI_BUFFER_SIZE 64
+#define DMI_PATH "/sys/class/dmi/id/"
+#define DMI_NUM_METRICS (sizeof(SYSFS_DMI_METRICS)/sizeof(char *))
+
+const char * const SYSFS_DMI_METRICS[] = {
+    "board_vendor",
+    "board_name",
+    "board_version",
+    "product_family",
+    "product_name",
+    "product_version",
+    "sys_vendor",
+};
+
 void stripNewline(char *s) {
     int i;
     for (i = 0; s[i] != '\0' && i < DMI_BUFFER_SIZE; i++) {
@@ -37,6 +51,7 @@ int getMetricFromFile(char * metricBuffer, const char * filename) {
 }
 
 int refresh_sysfs_dmi(sysfs_dmi_t *sysfs_dmi) {
+
     char buffer[DMI_NUM_METRICS][DMI_BUFFER_SIZE];
     memset(buffer, '\0', sizeof(buffer));
 

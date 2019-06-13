@@ -21,7 +21,7 @@ scriptpath="$( cd "$(dirname "$0")" ; pwd -P )"
 export DMI_PATH_TEST="$scriptpath/linux/dmi_test/"
 pmda=$PCP_PMDAS_DIR/linux/pmda_linux.so,linux_init
 
-echo "== Checking dmi info using sample data from $DMI_PATH_TEST"
+echo "== Checking dmi info using sample data"
 pminfo -fL -K clear -K add,60,$pmda hinv.dmi
 echo && echo "== done" && echo
 

@@ -1,5 +1,5 @@
 QA output created by 1645
-== Checking dmi info using sample data from /root/pcp/qa/linux/dmi_test/
+== Checking dmi info using sample data
 
 hinv.dmi.board_vendor
     value "test_BoardVendor_test"
@@ -23,3 +23,4 @@ hinv.dmi.sys_vendor
     value "test_SysVendor_test"
 
 == done
+

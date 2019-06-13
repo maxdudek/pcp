@@ -16,7 +16,7 @@ const char * const SYSFS_DMI_METRICS[] = {
     "sys_vendor",
 };
 
-void stripNewline(char *s) {
+void stripNewline(char * s) {
     int i;
     for (i = 0; s[i] != '\0' && i < DMI_BUFFER_SIZE; i++) {
         if (s[i] == '\n') s[i] = '\0';
@@ -35,7 +35,7 @@ int getMetricFromFile(char * metricBuffer, const char * filename) {
     FILE * f = fopen (filename, "rb");
 
     if (f) {
-        if (fread (metricBuffer, 1, DMI_BUFFER_SIZE, f) == 0) {
+        if (fread (metricBuffer, 1, DMI_BUFFER_SIZE, f) <= 0) {
             return 3; // Read error
         }
         fclose (f);
@@ -49,18 +49,22 @@ int getMetricFromFile(char * metricBuffer, const char * filename) {
     return 0; // Success
 }
 
-int refresh_sysfs_dmi(sysfs_dmi_t *sysfs_dmi) {
+int refresh_sysfs_dmi(sysfs_dmi_t * sysfs_dmi) {
+
+    // If the testing environment variable is set, change the path to the test path
+    char * filePath = DMI_PATH;
+    char * env = getenv("DMI_PATH_TEST");
+    if (env != NULL) filePath = env;
 
     char buffer[DMI_NUM_METRICS][DMI_BUFFER_SIZE];
     memset(buffer, '\0', sizeof(buffer));
 
     int i;
     for (i = 0; i < DMI_NUM_METRICS; i++) {
-        const char *metricName = SYSFS_DMI_METRICS[i];
+        const char * metricName = SYSFS_DMI_METRICS[i];
         
         char dmiFilename[DMI_BUFFER_SIZE];
-        sprintf(dmiFilename, "%s%s", DMI_PATH, metricName);
-
+        sprintf(dmiFilename, "%s%s", filePath, metricName);
         int result = getMetricFromFile(buffer[i], dmiFilename);
 
         // If the file read failed, get an empty string

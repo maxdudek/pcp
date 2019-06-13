@@ -1,6 +1,9 @@
 #! /bin/sh
 # PCP QA Test No. 1645
 # test hinv.dmi metrics fetch
+#
+# @author Max Dudek (maxdudek@gmail.com)
+#
 
 seq=`basename $0`
 echo "QA output created by $seq"

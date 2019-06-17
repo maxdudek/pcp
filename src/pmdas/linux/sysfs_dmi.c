@@ -71,7 +71,7 @@ int refresh_sysfs_dmi(sysfs_dmi_t * sysfs_dmi) {
         if (result != 0) buffer[i][0] = '\0';
     }
 
-    // Move data from buffer to struct
+    // Move data from buffer to sysfs_dmi struct
     strncpy(sysfs_dmi->board_vendor, buffer[0], DMI_BUFFER_SIZE);
     strncpy(sysfs_dmi->board_name, buffer[1], DMI_BUFFER_SIZE);
     strncpy(sysfs_dmi->board_version, buffer[2], DMI_BUFFER_SIZE);

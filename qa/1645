@@ -21,7 +21,7 @@ trap "cd $here; rm -rf $tmp.*; exit \$status" 0 1 2 3 15
 
 # real QA test starts here
 scriptpath="$( cd "$(dirname "$0")" ; pwd -P )"
-export DMI_PATH_TEST="$scriptpath/linux/dmi_test/"
+export DMI_PATH_TEST="$scriptpath/linux/"
 pmda=$PCP_PMDAS_DIR/linux/pmda_linux.so,linux_init
 
 echo "== Checking dmi info using sample data"

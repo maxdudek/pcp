@@ -10,7 +10,7 @@ PROCNETFILES = $(shell echo procnet-* proc_net_*)
 PROCSERIALFILES = $(shell echo proc_serial_*)
 PROCSYSFILES = $(shell echo procsys-*)
 BIGPIDFILE = $(shell echo proc-big-pid-001.tgz)
-DMIFILES = $(shell echo board_vendor board_name board_version product_family product_name product_version sys_vendor)
+DMIFILES = $(shell echo board_vendor board_name board_version product_family product_name sys_vendor)
 
 default setup default_pcp:
 

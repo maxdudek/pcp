@@ -1,0 +1,26 @@
+QA output created by 1645
+== Checking dmi info using sample data
+
+hinv.dmi.board_vendor
+    value "test_BoardVendor_test"
+
+hinv.dmi.board_name
+    value "test_BoardName_test"
+
+hinv.dmi.board_version
+    value "test_BoardVersion_test"
+
+hinv.dmi.product_family
+    value "test_ProductFamily_test"
+
+hinv.dmi.product_name
+    value "test_ProductName_test"
+
+hinv.dmi.product_version
+No value(s) available!
+
+hinv.dmi.sys_vendor
+    value "test_SysVendor_test"
+
+== done
+

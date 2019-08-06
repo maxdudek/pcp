@@ -49,6 +49,7 @@ hinv {
     map		
     cpu
     node
+    dmi
     hugepagesize	60:1:59
     ntape		60:71:16
 }
@@ -76,6 +77,16 @@ hinv.cpu {
 
 hinv.node {
     online		60:55:1
+}
+
+hinv.dmi {
+    board_vendor        60:86:0
+    board_name          60:86:1
+    board_version       60:86:2
+    product_family      60:86:3
+    product_name        60:86:4
+    product_version     60:86:5
+    sys_vendor          60:86:6
 }
 
 kernel {

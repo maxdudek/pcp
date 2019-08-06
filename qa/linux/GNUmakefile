@@ -10,6 +10,7 @@ PROCNETFILES = $(shell echo procnet-* proc_net_*)
 PROCSERIALFILES = $(shell echo proc_serial_*)
 PROCSYSFILES = $(shell echo procsys-*)
 BIGPIDFILE = $(shell echo proc-big-pid-001.tgz)
+DMIFILES = $(shell echo board_vendor board_name board_version product_family product_name sys_vendor)
 
 default setup default_pcp:
 
@@ -18,6 +19,7 @@ install install_pcp: $(ROOTFILES)
 	$(INSTALL) -m 644 $(ROOTFILES) $(SYSFSFILES) $(TESTDIR)
 	$(INSTALL) -m 644 $(CPUINFOFILES) $(BIGPIDFILE) $(PROCSERIALFILES) $(TESTDIR)
 	$(INSTALL) -m 644 $(PROCIRQFILES) $(PROCNETFILES) $(PROCSYSFILES) $(TESTDIR)
+	$(INSTALL) -m 644 $(DMIFILES) $(TESTDIR)
 	$(INSTALL) -m 644 GNUmakefile.install $(TESTDIR)/GNUmakefile
 
 include $(BUILDRULES)

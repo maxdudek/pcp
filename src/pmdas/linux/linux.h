@@ -107,6 +107,7 @@ enum {
 	CLUSTER_PRESSURE_CPU,	/* 83 /proc/pressure/cpu metrics */
 	CLUSTER_PRESSURE_MEM,	/* 84 /proc/pressure/memory metrics */
 	CLUSTER_PRESSURE_IO,	/* 85 /proc/pressure/io metrics */
+	CLUSTER_SYSFS_DMI,		/* 86 /sys/class/dmi/id/ metrics */
 
 	NUM_CLUSTERS		/* one more than highest numbered cluster */
 };

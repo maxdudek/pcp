@@ -8183,37 +8183,37 @@ linux_fetchCallBack(pmdaMetric *mdesc, unsigned int inst, pmAtomValue *atom)
     case CLUSTER_SYSFS_DMI:
         switch(item) {
             case 0: /* hinv.dmi.board_vendor */
-                if (sysfs_dmi.board_vendor[0] == '\0')
+                if (sysfs_dmi.board_vendor_error == 1)
                     return 0;
                 atom->cp = sysfs_dmi.board_vendor;
                 break;
             case 1: /* hinv.dmi.board_name */
-                if (sysfs_dmi.board_name[0] == '\0')
+                if (sysfs_dmi.board_name_error == 1)
                     return 0;
                 atom->cp = sysfs_dmi.board_name;
                 break;
             case 2: /* hinv.dmi.board_version */
-                if (sysfs_dmi.board_version[0] == '\0')
+                if (sysfs_dmi.board_version_error == 1)
                     return 0;
                 atom->cp = sysfs_dmi.board_version;
                 break;
             case 3: /* hinv.dmi.product_family */
-                if (sysfs_dmi.product_family[0] == '\0')
+                if (sysfs_dmi.product_family_error == 1)
                     return 0;
                 atom->cp = sysfs_dmi.product_family;
                 break;
             case 4: /* hinv.dmi.product_name */
-                if (sysfs_dmi.product_name[0] == '\0')
+                if (sysfs_dmi.product_name_error == 1)
                     return 0;
                 atom->cp = sysfs_dmi.product_name;
                 break;
             case 5: /* hinv.dmi.product_version */
-                if (sysfs_dmi.product_version[0] == '\0')
+                if (sysfs_dmi.product_version_error == 1)
                     return 0;
                 atom->cp = sysfs_dmi.product_version;
                 break;
             case 6: /* hinv.dmi.sys_vendor */
-                if (sysfs_dmi.sys_vendor[0] == '\0')
+                if (sysfs_dmi.sys_vendor_error == 1)
                         return 0;
                     atom->cp = sysfs_dmi.sys_vendor;
                 break;
